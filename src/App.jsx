@@ -3,6 +3,7 @@ import Blog from './components/Blog'
 import blogService from './services/blogs'
 import LoginForm from './components/LoginForm'
 import loginService from './services/login'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -35,6 +36,13 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
+
+
+  }
+
+  const createBlog = async (blog) => {
+    const returnedBlog = await blogService.create(blog, user.token)
+    setBlogs(blogs.concat(returnedBlog))
   }
 
   if (user === null) {
@@ -42,16 +50,14 @@ const App = () => {
 
   }
 
+
+
   return (
     <div>
-
-
-
-
-
       <h2>blogs</h2>
       <p>{user.name} logged in</p>
       <button onClick={handleLogout}>Logout</button>
+      <BlogForm createBlog={createBlog} />
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
