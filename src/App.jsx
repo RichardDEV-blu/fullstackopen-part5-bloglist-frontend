@@ -89,6 +89,13 @@ const App = () => {
 
   }
 
+  const deleteBlog = async (blog) => {
+    if (window.confirm(`Remove blog ${blog.title}?`)) {
+      await blogService.remove(blog.id, user.token)
+    }
+    setBlogs(blogs.filter(b => b.id !== blog.id))
+  }
+
   if (user === null) {
     return (
       <div>
@@ -118,6 +125,8 @@ const App = () => {
             key={blog.id}
             blog={blog}
             likeBlog={likeBlog}
+            deleteBlog={deleteBlog}
+            user={user}
           />
         )}
 
