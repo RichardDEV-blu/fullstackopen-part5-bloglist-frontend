@@ -16,7 +16,7 @@ const create = async (newObject, token) => {
   return response.data
 }
 
-const update = async (id, blog, token)=>{
+const update = async (id, blog, token) => {
   const config = {
     headers: {
       Authorization: `Bearer ${token}`
@@ -27,7 +27,7 @@ const update = async (id, blog, token)=>{
 }
 
 const remove = async (id, token) => {
- const config = {
+  const config = {
     headers: {
       Authorization: `Bearer ${token}`
     }

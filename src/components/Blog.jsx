@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 const Blog = ({ blog, likeBlog, deleteBlog, user }) => {
   const [visible, setVisible] = useState(false)
 
@@ -6,12 +6,12 @@ const Blog = ({ blog, likeBlog, deleteBlog, user }) => {
   const showWhenVisible = { display: visible ? '' : 'none' }
 
   const blogStyle = {
-  paddingTop: 10,
-  paddingLeft: 2,
-  border: 'solid',
-  borderWidth: 2,
-  marginBottom: 5
-}
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: 'solid',
+    borderWidth: 2,
+    marginBottom: 5
+  }
 
   return (
     <div style={blogStyle}>

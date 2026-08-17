@@ -37,7 +37,7 @@ const App = () => {
       )
 
       setUser(user)
-    } catch (exception) {
+    } catch {
       showNotification('wrong username or password', 'error')
     }
   }
@@ -59,7 +59,7 @@ const App = () => {
         `a new blog ${returnedBlog.title} added`,
         'success'
       )
-    } catch (exception) {
+    } catch {
       showNotification('failed to create blog', 'error')
     }
   }

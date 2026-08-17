@@ -1,58 +1,58 @@
 import { useState } from 'react'
 const BlogForm = ({ createBlog }) => {
-    const [title, setTitle] = useState('')
-    const [author, setAuthor] = useState('')
-    const [url, setUrl] = useState('')
+  const [title, setTitle] = useState('')
+  const [author, setAuthor] = useState('')
+  const [url, setUrl] = useState('')
 
-    const addBlog = (event) => {
-        event.preventDefault()
+  const addBlog = (event) => {
+    event.preventDefault()
 
-        createBlog({
-            title,
-            author,
-            url
-        })
+    createBlog({
+      title,
+      author,
+      url
+    })
 
-        setTitle('')
-        setAuthor('')
-        setUrl('')
-    }
+    setTitle('')
+    setAuthor('')
+    setUrl('')
+  }
 
-    return (
-        <form onSubmit={addBlog}>
-            <div>
-                <label>
+  return (
+    <form onSubmit={addBlog}>
+      <div>
+        <label>
                     title
-                    <input
-                        value={title}
-                        onChange={({ target }) => setTitle(target.value)}
-                    />
-                </label>
-            </div>
+          <input
+            value={title}
+            onChange={({ target }) => setTitle(target.value)}
+          />
+        </label>
+      </div>
 
-            <div>
-                <label>
+      <div>
+        <label>
                     author
-                    <input
-                        value={author}
-                        onChange={({ target }) => setAuthor(target.value)}
-                    />
-                </label>
-            </div>
+          <input
+            value={author}
+            onChange={({ target }) => setAuthor(target.value)}
+          />
+        </label>
+      </div>
 
-            <div>
-                <label>
+      <div>
+        <label>
                     url
-                    <input
-                        value={url}
-                        onChange={({ target }) => setUrl(target.value)}
-                    />
-                </label>
-            </div>
+          <input
+            value={url}
+            onChange={({ target }) => setUrl(target.value)}
+          />
+        </label>
+      </div>
 
-            <button type="submit">create</button>
-        </form>
-    )
+      <button type="submit">create</button>
+    </form>
+  )
 }
 
 export default BlogForm
