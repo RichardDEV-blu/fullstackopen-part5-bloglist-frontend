@@ -14,7 +14,7 @@ const Blog = ({ blog, likeBlog, deleteBlog, user }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div data-testid='blog' style={blogStyle}>
       <div>
         {blog.title} {blog.author}
       </div>
