@@ -78,15 +78,16 @@ const App = () => {
       likes: blog.likes + 1,
       user: blog.user.id
     }
+
     const returnedBlog = await blogService.update(
       blog.id,
       updatedBlog,
       user.token
     )
-    setBlogs(blogs.map(b => b.id === returnedBlog.id ? returnedBlog : b
-    ))
 
-
+    setBlogs(blogs =>
+      blogs.map(b => b.id === returnedBlog.id ? returnedBlog : b)
+    )
   }
 
   const deleteBlog = async (blog) => {
