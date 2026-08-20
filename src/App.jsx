@@ -20,10 +20,10 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+
     if (loggedUserJSON) {
       const logged = JSON.parse(loggedUserJSON)
       setUser(logged)
-
     }
   }, [])
 
@@ -45,15 +45,15 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('loggedBlogappUser')
     setUser(null)
-
-
   }
 
   const createBlog = async (blog) => {
     try {
       const returnedBlog = await blogService.create(blog, user.token)
 
-      setBlogs(currentBlogs => currentBlogs.concat(returnedBlog))
+      setBlogs(currentBlogs =>
+        currentBlogs.concat(returnedBlog)
+      )
 
       showNotification(
         `a new blog ${returnedBlog.title} added`,
@@ -66,10 +66,10 @@ const App = () => {
 
   const showNotification = (message, type) => {
     setNotification({ message, type })
+
     setTimeout(() => {
       setNotification(null)
     }, 5000)
-
   }
 
   const likeBlog = async (blog) => {
@@ -85,42 +85,56 @@ const App = () => {
       user.token
     )
 
-    setBlogs(blogs =>
-      blogs.map(b => b.id === returnedBlog.id ? returnedBlog : b)
+    setBlogs(currentBlogs =>
+      currentBlogs.map(b =>
+        b.id === returnedBlog.id ? returnedBlog : b
+      )
     )
   }
 
   const deleteBlog = async (blog) => {
-    if (window.confirm(`Remove blog ${blog.title}?`)) {
-      await blogService.remove(blog.id, user.token)
+    if (!window.confirm(`Remove blog ${blog.title}?`)) {
+      return
     }
-    setBlogs(blogs.filter(b => b.id !== blog.id))
+
+    await blogService.remove(blog.id, user.token)
+
+    setBlogs(currentBlogs =>
+      currentBlogs.filter(b => b.id !== blog.id)
+    )
   }
 
   if (user === null) {
     return (
       <div>
-        <Notification message={notification?.message}
-          type={notification?.type} />
+        <Notification
+          message={notification?.message}
+          type={notification?.type}
+        />
         <LoginForm handleLogin={handleLogin} />
       </div>
     )
-
   }
-
-
 
   return (
     <div>
-      <Notification message={notification?.message}
-        type={notification?.type} />
+      <Notification
+        message={notification?.message}
+        type={notification?.type}
+      />
+
       <h2>blogs</h2>
+
       <p>{user.name} logged in</p>
+
       <button onClick={handleLogout}>Logout</button>
+
       <Togglable buttonLabel="create new blog">
         <BlogForm createBlog={createBlog} />
       </Togglable>
-      {[...blogs].sort((a, b) => b.likes - a.likes)
+
+      {[...blogs]
+        .sort((a, b) => b.likes - a.likes)
         .map(blog =>
           <Blog
             key={blog.id}
@@ -130,8 +144,6 @@ const App = () => {
             user={user}
           />
         )}
-
-
     </div>
   )
 }
