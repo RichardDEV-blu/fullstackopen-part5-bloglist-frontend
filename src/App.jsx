@@ -53,7 +53,7 @@ const App = () => {
     try {
       const returnedBlog = await blogService.create(blog, user.token)
 
-      setBlogs(blogs.concat(returnedBlog))
+      setBlogs(currentBlogs => currentBlogs.concat(returnedBlog))
 
       showNotification(
         `a new blog ${returnedBlog.title} added`,
